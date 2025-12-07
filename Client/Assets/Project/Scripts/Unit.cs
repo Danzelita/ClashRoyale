@@ -1,25 +1,41 @@
+using System;
 using Project.Scripts.States;
 using UnityEngine;
 
 namespace Project.Scripts
 {
     [RequireComponent(typeof(UnitParameters), typeof(Health))]
-    public class Unit : MonoBehaviour, IHealth
+    public class Unit : MonoBehaviour, IHealth, IDestroyed
     {
+        public event Action Destroyed;
         [field: SerializeField] public Health Health { get; private set; } 
         [field: SerializeField] public bool IsPlayer;
         [field: SerializeField] public UnitParameters Parameters;
+        [SerializeField] private UnitAnimation _animation;
         [SerializeField] private UnitState _defaultStateSO;
         [SerializeField] private UnitState _chaseStateSO;
         [SerializeField] private UnitState _attackStateSO;
-        
+
         private UnitState _defaultState;
         private UnitState _chaseState;
         private UnitState _attackState;
-        
+
         private UnitState _currentState;
 
-        private void Awake()
+
+        private void Start()
+        {
+            _animation.Init(this);
+            
+            CreateStates();
+
+            _currentState = _defaultState;
+            _currentState.Enter();
+            
+            Health.Death += OnDeath;
+        }
+
+        private void CreateStates()
         {
             _defaultState = Instantiate(_defaultStateSO);
             _defaultState.Construct(this);
@@ -29,11 +45,6 @@ namespace Project.Scripts
             
             _attackState = Instantiate(_attackStateSO);
             _attackState.Construct(this);
-
-            _currentState = _defaultState;
-            _currentState.Enter();
-            
-            Health.Death += OnDeath;
         }
 
         private void Update() => 
@@ -42,9 +53,10 @@ namespace Project.Scripts
         private void OnDeath()
         {
             Health.Death -= OnDeath;
-            
-            Map.Current.RemoveUnit(this);
+
             Destroy(gameObject);
+            
+            Destroyed?.Invoke();
         }
 
         public void SetState(UnitStateType stateType)
@@ -63,11 +75,12 @@ namespace Project.Scripts
                     _currentState = _attackState;
                     break;
                 default:
-                    Debug.LogError("Invalid state type");
+                    //Debug.LogError("Invalid state type");
                     break;
             }
             
             _currentState.Enter();
+            _animation.SetState(stateType);
         }
 
 #if UNITY_EDITOR
@@ -82,9 +95,9 @@ namespace Project.Scripts
             
             if (Application.isPlaying == false)
             {
-                _defaultState?.DebugDraw(this);
+                _defaultStateSO?.DebugDraw(this);
                 _chaseStateSO?.DebugDraw(this);
-                _attackState?.DebugDraw(this);
+                _attackStateSO?.DebugDraw(this);
             }
             else
             {

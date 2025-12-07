@@ -16,6 +16,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: BowTower_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1519818428510224548, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028236276108405714, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.97331643
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028236276108405714, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.97331643
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028236276108405714, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.97331643
+      objectReference: {fileID: 0}
     - target: {fileID: 3990763826302393550, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.500005
@@ -58,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4266906785130767439, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266906785130767439, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -66,11 +82,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4266906785130767439, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4266906785130767439, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -1080
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599184010220597403, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
+      propertyPath: m_Extents.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599184010220597403, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
+      propertyPath: m_Extents.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7732056637187766418, guid: fbf572d96a3ec484c97bf51e058312e7, type: 3}
       propertyPath: m_Color.b

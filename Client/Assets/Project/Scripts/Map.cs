@@ -17,6 +17,7 @@ namespace Project.Scripts
                 return;
             }
             Current = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         private void OnDestroy()
@@ -28,15 +29,65 @@ namespace Project.Scripts
 
         #endregion
         
+        [Header("Player")]
         [SerializeField] private List<Tower> _playerTowers = new();
-        [SerializeField] private List<Tower> _enemyTowers = new();
+        [SerializeField] private List<Unit> _playerWalkingUnits = new();
+        [SerializeField] private List<Unit> _playerFlyUnits = new();
         
-        [SerializeField] private List<Unit> _playerUnits = new();
-        [SerializeField] private List<Unit> _enemyUnits = new();
+        [Header("Enemy")]
+        [SerializeField] private List<Tower> _enemyTowers = new();
+        [SerializeField] private List<Unit> _enemyWalkingUnits = new();
+        [SerializeField] private List<Unit> _enemyFlyUnits = new();
 
-        public bool TryGetNearestUnit(in Vector3 currentPosition, bool isPlayer, out Unit unit, out float distance)
+        private void Start()
         {
-            List<Unit> units = isPlayer ? _enemyUnits : _playerUnits;
+            SubscribeDestroy(_enemyTowers);
+            SubscribeDestroy(_enemyWalkingUnits);
+            SubscribeDestroy(_enemyFlyUnits);
+            
+            SubscribeDestroy(_playerTowers);
+            SubscribeDestroy(_playerWalkingUnits);
+            SubscribeDestroy(_playerFlyUnits);
+        }
+
+        public void AddUnit(Unit unit)
+        {
+            List<Unit> list;
+            
+            if (unit.IsPlayer)
+                list = unit.Parameters.IsFly ? _playerFlyUnits : _playerWalkingUnits;
+            else
+                list = unit.Parameters.IsFly ? _enemyFlyUnits : _enemyWalkingUnits;
+
+            AddObjectToList(list, unit);
+        }
+
+
+        public bool TryGetNearestAnyUnit(in Vector3 currentPosition, bool isPlayer, out Unit unit, out float distance)
+        {
+            TryGetNearestWalkingUnit(currentPosition, isPlayer, out Unit walking, out float walkingDistance);
+            TryGetNearestFlyUnit(currentPosition, isPlayer, out Unit fly, out float flyDistance);
+            if (flyDistance < walkingDistance)
+            {
+                unit = fly;
+                distance = flyDistance;
+            }
+            else
+            {
+                unit = walking;
+                distance = walkingDistance;
+            }
+            return unit;
+        }
+        public bool TryGetNearestWalkingUnit(in Vector3 currentPosition, bool isPlayer, out Unit unit, out float distance)
+        {
+            List<Unit> units = isPlayer ? _enemyWalkingUnits : _playerWalkingUnits;
+            unit = GetNearest(currentPosition, units, out distance);
+            return unit;
+        }
+        public bool TryGetNearestFlyUnit(in Vector3 currentPosition, bool isPlayer, out Unit unit, out float distance)
+        {
+            List<Unit> units = isPlayer ? _enemyFlyUnits : _playerFlyUnits;
             unit = GetNearest(currentPosition, units, out distance);
             return unit;
         }
@@ -65,23 +116,39 @@ namespace Project.Scripts
                 distance = tempDitance;
                 nearest = objects[i];
             }
+            
             return nearest;
         }
 
-        public void RemoveUnit(Unit unit)
+        private void SubscribeDestroy<T>(List<T> list) where T : IDestroyed
         {
-            if (_playerUnits.Remove(unit))
-                return;
+            for (int i = 0; i < list.Count; i++)
+            {
+                T obj = list[i];
+                list[i].Destroyed += RemoveAndUnsubscribe;
 
-            _enemyUnits.Remove(unit);
+                void RemoveAndUnsubscribe()
+                {
+                    RemoveObjectFromList(list, obj);
+                    obj.Destroyed -= RemoveAndUnsubscribe;
+                }
+            }
         }
-
-        public void RemoveTower(Tower tower)
+        
+        private void AddObjectToList<T>(List<T> list, T obj)  where T : IDestroyed
         {
-            if (_playerTowers.Remove(tower))
-                return;
-            
-            _enemyTowers.Remove(tower);
+            list.Add(obj);
+            obj.Destroyed += RemoveAndUnsubscribe;
+            void RemoveAndUnsubscribe()
+            {
+                RemoveObjectFromList(list, obj);
+                obj.Destroyed -= RemoveAndUnsubscribe;
+            }
+        }
+        private void RemoveObjectFromList<T>(List<T> list, T obj) where T : IDestroyed
+        {
+            if (list.Contains(obj))
+                list.Remove(obj);
         }
     }
 }

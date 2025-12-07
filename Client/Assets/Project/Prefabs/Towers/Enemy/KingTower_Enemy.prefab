@@ -32,6 +32,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1277272224145815432, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2538f2107be03c243a2d0aa8173f3166, type: 2}
+    - target: {fileID: 1277272224145815432, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 57495412892b1d244b243cf9ffa43ec0, type: 2}
     - target: {fileID: 1642057979823553333, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
       propertyPath: _colorsData
       value: 
@@ -90,16 +98,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6616662588445490161, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6616662588445490161, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6616662588445490161, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7535940291256929566, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 57495412892b1d244b243cf9ffa43ec0, type: 2}
     - target: {fileID: 7540504088141828373, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
       propertyPath: m_Icon
       value: 
@@ -107,6 +119,22 @@ PrefabInstance:
     - target: {fileID: 7540504088141828373, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
       propertyPath: m_Name
       value: KingTower_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696905805035077419, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2538f2107be03c243a2d0aa8173f3166, type: 2}
+    - target: {fileID: 7696905805035077419, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 57495412892b1d244b243cf9ffa43ec0, type: 2}
+    - target: {fileID: 8499269149023100698, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499269149023100698, guid: 1e4937a18d0b2db4c9b6ab30e2f55d12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.87
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

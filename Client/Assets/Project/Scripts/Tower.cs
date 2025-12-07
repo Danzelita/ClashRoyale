@@ -3,23 +3,26 @@ using UnityEngine;
 
 namespace Project.Scripts
 {
-    public class Tower : MonoBehaviour, IHealth
+    public class Tower : MonoBehaviour, IHealth, IDestroyed
     {
-        [field: SerializeField] public Health Health { get; private set; } 
-        
+        public event Action Destroyed;
+        [field: SerializeField] public Health Health { get; private set; }
+
         [field: SerializeField] public float Radius { get; private set; } = 2f;
+
 
         private void Awake()
         {
-            Health.Death += HealthOnDeath;
+            Health.Death += OnDeath;
         }
 
-        private void HealthOnDeath()
+        private void OnDeath()
         {
-            Health.Death -= HealthOnDeath;
-            
-            Map.Current.RemoveTower(this);
+            Health.Death -= OnDeath;
+
             Destroy(gameObject);
+            
+            Destroyed?.Invoke();
         }
 
         public float GetDistance(in Vector3 point) => 

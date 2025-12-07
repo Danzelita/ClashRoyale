@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Project.Scripts
@@ -14,9 +15,21 @@ namespace Project.Scripts
         private void Awake() => 
             Current = Max;
 
-        public void ApplyDamage(float value)
+        public void ApplyDamage(float damage) => 
+            ApplyDelayDamage(damage, 0.075f);
+
+        public void ApplyDelayDamage(in float damage, in float delay) => 
+            StartCoroutine(DelayDamage(damage, delay));
+
+        private IEnumerator DelayDamage(float damage, float delay)
         {
-            Current -= value;
+            yield return new WaitForSeconds(delay);
+            ApplyDamageAndCheckDie(damage);
+        }
+
+        private void ApplyDamageAndCheckDie(float damage)
+        {
+            Current -= damage;
             Current = Mathf.Max(0f, Current);
             
             HealthChange?.Invoke(Current, Max);
