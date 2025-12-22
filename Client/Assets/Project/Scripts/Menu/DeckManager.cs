@@ -20,6 +20,9 @@ namespace Project.Scripts.Menu
 
         public void Init(List<int> avaliableCardsIndexes, int[] selectedCardsIndexes)
         {
+            _avaliableCards.Clear();
+            _selectedCards.Clear();
+            
             for (int i = 0; i < avaliableCardsIndexes.Count; i++)
                 _avaliableCards.Add(_allCards[avaliableCardsIndexes[i]]);
 

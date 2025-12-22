@@ -10,10 +10,13 @@ namespace Project.Scripts.Menu
         [SerializeField] private List<int> _avalibleCards = new();
         [SerializeField] private int[] _selectedCards = new int[6];
 
-        private void Start() => 
+        private void Start()
+        {
             StartLoad();
+            LoadingScreen.Instance.Show();
+        }
 
-        private void StartLoad()
+        public void StartLoad()
         {
             Dictionary<string, string> data = new()
             {
@@ -37,6 +40,8 @@ namespace Project.Scripts.Menu
                 _avalibleCards.Add(int.Parse(deckData.avalibleCards[i].id));
             
             _deckManager.Init(_avalibleCards, _selectedCards);
+            
+            LoadingScreen.Instance.Hide();
         }
 
         private void Error(string error) => 

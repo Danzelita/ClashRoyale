@@ -9,6 +9,7 @@ namespace Project.Scripts.Menu
         
         public void UpdateCardsList(IReadOnlyList<Card> cards)
         {
+            Debug.Log(cards.Count);
             for (int i = 0; i < _cardViewPool.Length; i++) 
                 _cardViewPool[i].gameObject.SetActive(i < cards.Count);
             
