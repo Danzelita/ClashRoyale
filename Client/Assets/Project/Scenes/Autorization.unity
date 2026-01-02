@@ -908,6 +908,7 @@ GameObject:
   - component: {fileID: 276080801}
   - component: {fileID: 276080803}
   - component: {fileID: 276080802}
+  - component: {fileID: 276080804}
   m_Layer: 5
   m_Name: Loading
   m_TagString: Untagged
@@ -972,6 +973,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276080800}
   m_CullTransparentMesh: 1
+--- !u!114 &276080804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276080800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df73e92573a4b899e5cc9bc41fd7199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Menu.ImageRotator
+  _loadingImage: {fileID: 276080801}
+  _rotationSpeed: -540
 --- !u!1 &324176806
 GameObject:
   m_ObjectHideFlags: 0
@@ -4697,8 +4712,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Menu.LoadingScreen
   _loadingScreen: {fileID: 228773205}
-  _loadingImage: {fileID: 276080801}
-  _rotationSpeed: 720
 --- !u!1 &1907232700
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,11 @@ namespace Project.Scripts
 
         private UnitState _currentState;
 
+        public void Init(bool isPlayer)
+        {
+            IsPlayer = isPlayer;
+        }
+
 
         private void Start()
         {

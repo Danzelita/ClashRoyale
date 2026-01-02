@@ -6,8 +6,6 @@ namespace Project.Scripts.Menu
     public class LoadingScreen : MonoBehaviour
     {
         [SerializeField] private GameObject _loadingScreen;
-        [SerializeField] private RectTransform _loadingImage;
-        [SerializeField] private float _rotationSpeed;
 
         #region Singleton
         public static LoadingScreen Instance {get; private set;}
@@ -32,9 +30,6 @@ namespace Project.Scripts.Menu
         public void Hide() => 
             _loadingScreen.SetActive(false);
 
-        private void Update()
-        {
-            _loadingImage.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
-        }
+        
     }
 }

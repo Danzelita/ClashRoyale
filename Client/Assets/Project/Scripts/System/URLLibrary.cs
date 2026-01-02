@@ -2,8 +2,8 @@ using System.IO;
 
 public static class URLLibrary
 {
+        private const string MAIN = "http://localhost/Projects/ClashRoyaleServer/";
         private const string SET_SELECTED_CARDS = "Game/setSelectedCards.php";
-        private const string MAIN = "http://localhost/Projects/Test/";
         private const string AUTORIZATION = "Authorization/autorization.php";
         private const string REGISTRATION = "Authorization/registration.php";
         private const string GET_DECK_INFO = "Game/getDeckInfo.php";

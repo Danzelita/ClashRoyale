@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Project.Scripts.Menu
@@ -47,13 +48,22 @@ namespace Project.Scripts.Menu
         #endregion
 
 #endif
-    }
-
-    [System.Serializable]
-    public class Card
-    {
-        [field: SerializeField] public int Id { get; private set; }
-        public string Name;
-        public Sprite Sprite;
+        public bool TryGetDeck(string[] cardsIDs, out Dictionary<string, Card> deck)
+        {
+            deck = new();
+            for (int i = 0; i < cardsIDs.Length; i++)
+            {
+                if (int.TryParse(cardsIDs[i], out int id) == false || id == 0)
+                    return false;
+                
+                Card card = _allCards.FirstOrDefault(c => c.Id == id);
+                
+                if (card == null)
+                    return false;
+                
+                deck.Add(cardsIDs[i], card);
+            }
+            return true;
+        }
     }
 }
